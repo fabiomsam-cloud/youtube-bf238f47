@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>SOU · YouTube</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f5f6f8; --surface:#ffffff; --surface-2:#f2f4f7;
+  --ink:#0f172a; --ink-2:#334155; --muted:#64748b;
+  --grid:#e5e8ee; --ring:rgba(15,23,42,.08);
+  --gold:#b7791f; --blue:#2563eb; --green:#15803d; --red:#dc2626; --amber:#b45309; --cyan:#009BBE; --yt:#d92d20;
+  --avg:#94a3b8;
+  --disp:"Bricolage Grotesque",sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45;min-height:100vh;position:relative}
+body::before{content:"";position:absolute;left:0;right:0;top:0;height:520px;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 380px at 85% -20%, rgba(217,45,32,.08), transparent 60%),
+             radial-gradient(700px 320px at -5% 0%, rgba(0,155,190,.07), transparent 55%)}
+.wrap{position:relative;z-index:1;max-width:1480px;margin:0 auto;padding:26px 30px 90px}
+@media(max-width:700px){.wrap{padding:18px 16px 70px}}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.brand h1{font-family:var(--disp);font-weight:800;font-size:31px;letter-spacing:-.6px;line-height:1.02}
+.brand h1 em{font-style:normal;color:var(--yt)}
+.brand .sub{color:var(--muted);font-size:12.5px;margin-top:7px;letter-spacing:.2px;max-width:860px}
+.brand .sub b{color:var(--ink-2);font-weight:600}
+.stamp{text-align:right;font-size:12px;color:var(--muted)}
+.stamp .clock{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink-2);letter-spacing:-.2px}
+.stamp b{color:var(--ink-2)}
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:14px;padding:20px 22px;position:relative;box-shadow:0 1px 2px rgba(15,23,42,.04);margin-bottom:12px}
+@media(max-width:700px){.card{padding:16px 14px}}
+.card h2{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.2px}
+.card .hint{color:var(--muted);font-size:12px;margin-top:3px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.grid{display:grid;gap:12px;margin-bottom:12px}
+.g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1080px){.g2,.g3{grid-template-columns:1fr}}
+.grid .card{margin-bottom:0}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.tools input[type=search],.tools select{border:1px solid var(--ring);border-radius:10px;padding:7px 10px;font:inherit;font-size:12.5px;background:var(--surface);color:var(--ink-2);min-width:200px;max-width:100%}
+.tools label.chk{font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--ring);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:7px 12px;font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--ink);color:#fff}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 14px}
+.tabs button{border:1px solid var(--ring);background:var(--surface);border-radius:999px;padding:8px 16px;font:inherit;font-weight:600;font-size:13px;color:var(--ink-2);cursor:pointer}
+.tabs button.on{background:var(--yt);border-color:var(--yt);color:#fff}
+.rail{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+.cd{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:9px 14px;display:flex;align-items:baseline;gap:8px}
+.cd .n{font-family:var(--disp);font-weight:800;font-size:21px;color:var(--ink);letter-spacing:-.4px}
+.cd .l{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.alerts{display:grid;gap:8px}
+.al{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;border-radius:11px;background:var(--surface-2);font-size:13px;color:var(--ink-2)}
+.al .ic{font-size:16px;line-height:1.2}
+.al b{color:var(--ink)}
+.al.bad{background:rgba(220,38,38,.07)} .al.warn{background:rgba(180,83,9,.08)} .al.ok{background:rgba(21,128,61,.07)} .al.info{background:rgba(37,99,235,.06)}
+.rs-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rs{width:100%;border-collapse:collapse;font-size:12.5px}
+.rs.wide{min-width:980px}
+.rs th{text-align:right;color:var(--muted);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:6px 6px;border-bottom:1px solid var(--grid);vertical-align:bottom;line-height:1.25;white-space:nowrap}
+.rs th.l,.rs td.l{text-align:left}
+.rs th.sortable{cursor:pointer} .rs th.sorted{color:var(--yt)}
+.rs td{text-align:right;padding:7px 6px;border-bottom:1px solid var(--grid);font-variant-numeric:tabular-nums;vertical-align:top}
+.rs tr:hover td{background:rgba(15,23,42,.02)}
+.rs td.tit{max-width:430px;min-width:240px}
+.rs td.tit a{color:var(--ink);text-decoration:none;font-weight:600}
+.rs td.tit a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.03em;padding:1px 6px;border-radius:5px;margin:3px 4px 0 0;background:var(--surface-2);color:var(--muted);text-transform:uppercase}
+.tag.est{background:rgba(217,45,32,.1);color:var(--yt)} .tag.ef{background:rgba(37,99,235,.1);color:var(--blue)} .tag.sc{background:rgba(0,155,190,.12);color:#00758f}
+.tag.pago{background:rgba(180,83,9,.12);color:var(--amber)}
+.mut{color:var(--muted)} .good{color:var(--green);font-weight:700} .bad{color:var(--red);font-weight:700}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.pill.ativo{background:rgba(21,128,61,.1);color:var(--green)} .pill.esfr{background:rgba(180,83,9,.1);color:var(--amber)} .pill.par{background:rgba(100,116,139,.12);color:var(--muted)}
+.marcos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.marcos{grid-template-columns:1fr}}
+.mc{border:1px solid var(--ring);border-radius:12px;padding:12px 14px;background:var(--surface-2)}
+.mc h3{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:6px}
+.mc .big{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.4px}
+.mc .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-2);padding:2px 0}
+.mc .row span:last-child{font-variant-numeric:tabular-nums}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:7px 9px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,-110%);transition:opacity .08s}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-bottom:6px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.regra{border:1px solid var(--ring);border-radius:12px;padding:14px 16px;background:var(--surface)}
+.regra .hd{display:flex;gap:10px;align-items:flex-start}
+.regra .num{font-family:var(--disp);font-weight:800;font-size:18px;color:var(--muted);min-width:24px}
+.regra h3{font-size:14.5px;font-weight:700;line-height:1.35}
+.regra p{font-size:12.8px;color:var(--ink-2);margin-top:6px}
+.regra ul{margin:6px 0 0 18px;font-size:12.8px;color:var(--ink-2)}
+.regra li{margin:3px 0}
+.st{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:6px;letter-spacing:.03em}
+.st.hipotese{background:rgba(234,179,8,.15);color:#8a6100} .st.confirmada{background:rgba(21,128,61,.12);color:var(--green)} .st.derrubada{background:rgba(220,38,38,.1);color:var(--red)}
+.regras{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:1080px){.regras{grid-template-columns:1fr}}
+.empty{padding:24px;text-align:center;color:var(--muted)}
+.err{padding:30px;text-align:center;color:var(--red);font-weight:600}
+code{font-size:11.5px;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+.bars-mini{display:grid;gap:6px}
+.bm{display:grid;grid-template-columns:minmax(90px,150px) 1fr 96px;gap:8px;align-items:center;font-size:12.5px}
+.bm .bar{height:10px;border-radius:0 4px 4px 0;background:var(--cyan)}
+.bm .lab{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-2)}
+.bm .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">
+    <h1>SOU · <em>YouTube</em></h1>
+    <div class="sub">Os dois canais, <b>Sou Concurseiro e Vou Passar</b> e <b>Elite Federal</b>. Todo vídeo publicado entra sozinho. Métricas do YouTube Analytics (chegam com <b>2 a 3 dias</b> de atraso); cadastros ao vivo das páginas de captação (UTM do YouTube orgânico). Aprendizados = caderno da skill /youtube.</div>
+  </div>
+  <div class="stamp"><div class="clock" id="clk">—</div><div id="upd">carregando…</div></div>
+</header>
+
+<div class="tools">
+  <div class="seg" id="segCanal"><button data-v="" class="on">Os 2 canais</button><button data-v="scvp">Sou Concurseiro</button><button data-v="elite-federal">Elite Federal</button></div>
+</div>
+<div class="rail" id="rail"></div>
+<div class="card" id="cardAlertas"><div class="card-head"><div><h2>O que pede ação agora</h2><div class="hint">Gerado sozinho a cada atualização.</div></div></div><div class="alerts" id="alertas"></div></div>
+
+<div class="tabs" id="tabs">
+  <button data-t="placar" class="on">🏆 Placar</button>
+  <button data-t="novo">🆕 Vídeo novo</button>
+  <button data-t="acervo">🧲 Acervo que capta</button>
+  <button data-t="aprend">🧠 Aprendizados</button>
+</div>
+<div id="view"></div>
+</div>
+
+<script>
+const API = "https://dqpxugdhlgafvddavzzp.supabase.co/functions/v1/painel-youtube";
+const K = new URLSearchParams(location.search).get("k") || "";
+const CANAL = {"scvp":"Sou Concurseiro","elite-federal":"Elite Federal"};
+const FONTE = {SUBSCRIBER:"Início / feed",YT_SEARCH:"Busca",NOTIFICATION:"Notificação",RELATED_VIDEO:"Sugeridos",EXT_URL:"Links externos",
+  NO_LINK_OTHER:"Direto",YT_OTHER_PAGE:"Outras páginas",YT_CHANNEL:"Página do canal",PLAYLIST:"Playlist",ADVERTISING:"Anúncio (pago)",
+  SHORTS:"Feed de Shorts",END_SCREEN:"Tela final",HASHTAGS:"Hashtags",NO_LINK_EMBEDDED:"Incorporado",ANNOTATION:"Cards",CAMPAIGN_CARD:"Campanha",
+  LIVE_REDIRECT:"Redirecionamento de live",SOUND_PAGE:"Página de som",VIDEO_REMIXES:"Remixes",PRODUCT_PAGE:"Página de produto",IMMERSIVE_LIVE:"Live imersiva"};
+const DISP = {MOBILE:"Celular",DESKTOP:"Computador",TV:"TV",TABLET:"Tablet",GAME_CONSOLE:"Console"};
+let D = null, st = {canal:"", tab:"placar", per:"28", fmt:"", soEst:false, pagos:false, q:"", sort:"views", dir:-1, vid:null};
+try { const s = JSON.parse(localStorage.getItem("ytp") || "{}"); Object.assign(st, {tab:s.tab||st.tab, canal:s.canal??st.canal}); } catch(e) {}
+const save = () => { try { localStorage.setItem("ytp", JSON.stringify({tab:st.tab, canal:st.canal})); } catch(e) {} };
+
+const nf = n => n == null || isNaN(n) ? "—" : Math.round(n).toLocaleString("pt-BR");
+const n1 = n => n == null || isNaN(n) || !isFinite(n) ? "—" : n.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
+const pct = n => n == null || isNaN(n) ? "—" : n1(n) + "%";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const DAY = 864e5;
+const dParse = s => new Date(s.slice(0,10) + "T12:00:00");
+const dBR = s => { if(!s) return "—"; const d = new Date(s); return d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",timeZone:"America/Manaus"}); };
+const dBRd = s => s ? s.slice(8,10) + "/" + s.slice(5,7) : "—";
+const idade = v => (Date.now() - new Date(v.publicado_em)) / DAY;
+const mmss = s => s == null ? "—" : Math.floor(s/60) + ":" + String(Math.round(s%60)).padStart(2,"0");
+const durTxt = s => s == null ? "" : s >= 3600 ? Math.floor(s/3600) + "h" + String(Math.floor(s%3600/60)).padStart(2,"0") : mmss(s);
+const porMil = (a, b) => b ? 1000 * a / b : null;
+const pago = v => (D.detalhe[v.video_id]?.pago_pct ?? 0) > 50;
+const vids = () => D.videos.filter(v => !st.canal || v.canal === st.canal);
+const tagCanal = v => `<span class="tag ${v.canal === "scvp" ? "sc" : "ef"}">${v.canal === "scvp" ? "SCVP" : "Elite"}</span>`;
+const tagsV = v => tagCanal(v) + `<span class="tag">${({live: "live", short: "short", agendada: "live agendada", ao_vivo: "ao vivo agora"})[v.formato] || "vídeo"} ${durTxt(v.duracao_s)}</span>`
+  + (v.tipo ? `<span class="tag">${esc(v.tipo)}</span>` : "") + (v.esteira_slug ? `<span class="tag est">esteira</span>` : "") + (pago(v) ? `<span class="tag pago">pago ${Math.round(D.detalhe[v.video_id].pago_pct)}%</span>` : "");
+const yt = v => `https://youtu.be/${v.video_id}`;
+
+// ===== dia a dia: views por idade (dia 0 = dia da publicação, no dia do Pacífico) =====
+function serieIdade(v) {
+  const s = D.dia[v.video_id] || []; const p0 = dParse(new Date(new Date(v.publicado_em).getTime() - 7*3600e3).toISOString());
+  const out = [];
+  for (const [d, views, min, pc, subs] of s) { const i = Math.round((dParse(d) - p0) / DAY); if (i < 0) { out[0] = (out[0]||0) + views; continue; } out[i] = (out[i]||0) + views; }
+  for (let i = 0; i < out.length; i++) out[i] = out[i] || 0;
+  return out;
+}
+const acum = (arr, n) => arr.slice(0, n).reduce((a, b) => a + b, 0);
+function analyticsAte() { return D.coleta?.analytics_ate ? dParse(D.coleta.analytics_ate) : null; }
+function marcoOk(v, n) { const a = analyticsAte(); if (!a) return false; const p0 = dParse(new Date(new Date(v.publicado_em).getTime() - 7*3600e3).toISOString()); return (a - p0) / DAY >= n - 1; }
+
+// ===== gráfico de linhas (eixo único, crosshair + tooltip) =====
+function lineChart(el, series, o) {
+  const W = 640, H = 220, L = 46, R = 12, T = 10, B = 28;
+  const n = Math.max(...series.map(s => s.y.length)); if (!n) { el.innerHTML = `<div class="empty">Sem dado do Analytics ainda.</div>`; return; }
+  const ymax = o.ymax ?? Math.max(1, ...series.flatMap(s => s.y.filter(x => x != null))) * 1.08;
+  const X = i => L + (n === 1 ? 0 : i * (W - L - R) / (n - 1)), Y = y => T + (H - T - B) * (1 - y / ymax);
+  const ticks = 4; let g = "";
+  for (let t = 0; t <= ticks; t++) { const yv = ymax * t / ticks; g += `<line x1="${L}" x2="${W-R}" y1="${Y(yv)}" y2="${Y(yv)}" stroke="var(--grid)" stroke-width="1"/><text x="${L-6}" y="${Y(yv)+4}" text-anchor="end" font-size="10.5" fill="var(--muted)">${o.fy(yv)}</text>`; }
+  const step = Math.max(1, Math.ceil(n / 8));
+  for (let i = 0; i < n; i += step) g += `<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${o.fx(i)}</text>`;
+  const paths = series.map(s => { let d = "", up = false; s.y.forEach((y, i) => { if (y == null) { up = false; return; } d += (up ? "L" : "M") + X(i).toFixed(1) + "," + Y(y).toFixed(1); up = true; });
+    return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" ${s.dash ? 'stroke-dasharray="5 4"' : ""} stroke-linejoin="round" stroke-linecap="round"/>`; }).join("");
+  el.innerHTML = `<div class="legend">${series.map(s => `<span><i style="background:${s.color}${s.dash ? ";opacity:.8" : ""}"></i>${esc(s.name)}</span>`).join("")}</div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label || "")}">${g}${paths}<line class="xh" y1="${T}" y2="${H-B}" stroke="var(--ink-2)" stroke-width="1" opacity="0"/>
+    ${series.map((s, k) => `<circle class="dot${k}" r="4" fill="${s.color}" stroke="#fff" stroke-width="2" opacity="0"/>`).join("")}
+    <rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent"/></svg><div class="tip"></div>`;
+  const svg = el.querySelector("svg"), tip = el.querySelector(".tip"), xh = svg.querySelector(".xh");
+  svg.addEventListener("mousemove", ev => { const r = svg.getBoundingClientRect(); const x = (ev.clientX - r.left) * W / r.width;
+    const i = Math.max(0, Math.min(n - 1, Math.round((x - L) / ((W - L - R) / Math.max(1, n - 1)))));
+    xh.setAttribute("x1", X(i)); xh.setAttribute("x2", X(i)); xh.setAttribute("opacity", .35);
+    let html = `<b>${o.fx(i, true)}</b>`; series.forEach((s, k) => { const c = svg.querySelector(".dot" + k); const y = s.y[i];
+      if (y == null) { c.setAttribute("opacity", 0); return; } c.setAttribute("cx", X(i)); c.setAttribute("cy", Y(y)); c.setAttribute("opacity", 1); html += `<br>${esc(s.name)}: ${o.fy(y, true)}`; });
+    tip.innerHTML = html; tip.style.left = (X(i) / W * r.width) + "px"; tip.style.top = (T / H * r.height + 10) + "px"; tip.style.opacity = 1; });
+  svg.addEventListener("mouseleave", () => { tip.style.opacity = 0; xh.setAttribute("opacity", 0); svg.querySelectorAll("circle").forEach(c => c.setAttribute("opacity", 0)); });
+}
+function barChart(el, pts, o) {
+  const W = 640, H = 170, L = 34, R = 8, T = 8, B = 24, n = pts.length; if (!n) { el.innerHTML = `<div class="empty">Sem cadastros no período.</div>`; return; }
+  const ymax = Math.max(1, ...pts.map(p => p[1])) * 1.1, bw = (W - L - R) / n, Y = y => T + (H - T - B) * (1 - y / ymax);
+  let g = ""; for (let t = 0; t <= 3; t++) { const yv = ymax * t / 3; g += `<line x1="${L}" x2="${W-R}" y1="${Y(yv)}" y2="${Y(yv)}" stroke="var(--grid)"/><text x="${L-5}" y="${Y(yv)+4}" text-anchor="end" font-size="10.5" fill="var(--muted)">${Math.round(yv)}</text>`; }
+  pts.forEach((p, i) => { const x = L + i * bw + 1, h = Y(0) - Y(p[1]);
+    g += `<g class="b" data-i="${i}"><rect x="${L + i*bw}" y="${T}" width="${bw}" height="${H-T-B}" fill="transparent"/>${p[1] ? `<path d="M${x},${Y(0)} V${Y(p[1]) + Math.min(3, h)} q0,-3 3,-3 H${x + bw - 5} q3,0 3,3 V${Y(0)} Z" fill="var(--cyan)"/>` : ""}</g>`;
+    if (i % Math.ceil(n / 9) === 0) g += `<text x="${L + i*bw + bw/2}" y="${H-7}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${dBRd(p[0])}</text>`; });
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label)}">${g}</svg><div class="tip"></div>`;
+  const svg = el.querySelector("svg"), tip = el.querySelector(".tip");
+  svg.querySelectorAll(".b").forEach(b => { b.addEventListener("mousemove", () => { const i = +b.dataset.i, p = pts[i], r = svg.getBoundingClientRect();
+    tip.innerHTML = `<b>${dBRd(p[0])}</b><br>${p[1]} cadastros · ${p[2]} superior`; tip.style.left = ((L + i*bw + bw/2) / W * r.width) + "px"; tip.style.top = (Y(p[1]) / H * r.height) + "px"; tip.style.opacity = 1; });
+    b.addEventListener("mouseleave", () => tip.style.opacity = 0); });
+}
+function miniBars(rows, fmtv) {
+  if (!rows.length) return `<div class="mut" style="font-size:12.5px">—</div>`;
+  const mx = Math.max(...rows.map(r => r[1]));
+  return `<div class="bars-mini">${rows.map(r => `<div class="bm"><div class="lab" title="${esc(r[0])}">${esc(r[0])}</div><div><div class="bar" style="width:${Math.max(2, 100 * r[1] / mx)}%"></div></div><div class="val">${fmtv ? fmtv(r) : nf(r[1])}</div></div>`).join("")}</div>`;
+}
+
+// ===== topo =====
+function topo() {
+  const c = D.coleta;
+  document.getElementById("clk").textContent = new Date(D.generated_at).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",timeZone:"America/Manaus"});
+  document.getElementById("upd").innerHTML = c ? `rotina: <b>${new Date(c.em).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit",timeZone:"America/Manaus"})}</b> · Analytics até <b>${dBRd(c.analytics_ate)}</b>` : "rotina ainda não rodou";
+  const cd = D.canal_dia.filter(r => !st.canal || r[0] === st.canal), a = analyticsAte();
+  const ini28 = a ? new Date(a - 27 * DAY) : null;
+  const c28 = cd.filter(r => ini28 && dParse(r[1]) >= ini28);
+  // visualizações = só vídeos PÚBLICOS e não pagos (o total do canal soma os anúncios não listados)
+  const views = vids().filter(v => !pago(v)).reduce((s, v) => s + (v.v28_views || 0), 0), subs = c28.reduce((s, r) => s + r[4] - r[5], 0);
+  const cap = capFiltrada(); const cad7 = cap.reduce((s, r) => s + r.d7, 0), cad28 = cap.reduce((s, r) => s + r.d28, 0);
+  const novos = vids().filter(v => idade(v) <= 28 && v.formato !== "short").length;
+  document.getElementById("rail").innerHTML = [
+    [nf(views), "visualizações orgânicas · 28 d"], [(subs >= 0 ? "+" : "") + nf(subs), "inscritos líquidos · 28 d"],
+    [nf(cad7), "cadastros do YouTube · 7 d"], [nf(cad28), "cadastros · 28 d"], [novos, "vídeos/lives novos · 28 d"]
+  ].map(([n, l]) => `<div class="cd"><span class="n">${n}</span><span class="l">${l}</span></div>`).join("");
+  alertas();
+}
+function capFiltrada() {
+  if (!st.canal) return D.captacao;
+  const canalDe = Object.fromEntries(D.videos.map(v => [v.video_id, v.canal]));
+  return D.captacao.filter(c => !c.vids || !c.vids.length ? (st.canal === "scvp" ? !/elite-federal/.test(c.camp || "") : /elite-federal/.test(c.camp || "")) : c.vids.some(id => canalDe[id] === st.canal));
+}
+function alertas() {
+  const out = [], a = analyticsAte();
+  for (const v of vids().filter(v => v.esteira_slug)) {
+    const id = idade(v);
+    for (const [n, nome] of [[2, "48 h"], [7, "7 dias"], [30, "30 dias"]])
+      if (id >= n && id < n + 3) out.push(["info", "📊", `<b>${esc(v.titulo)}</b> fez ${nome}. Pedir a leitura ao Claude (<code>/youtube</code> modo LEITURA) para atualizar o caderno${marcoOk(v, n) ? "" : " — o Analytics ainda não fechou esse marco, espere 1–2 dias"}.`]);
+  }
+  const semLink = vids().filter(v => !v.tem_link && v.formato !== "short" && !pago(v) && (v.v28_views || 0) >= 300).sort((x, y) => y.v28_views - x.v28_views);
+  if (semLink.length) out.push(["warn", "🔗", `<b>${semLink.length} vídeo(s) com audiência e sem link de captação na descrição</b> (≥ 300 visualizações em 28 d): ${semLink.slice(0, 4).map(v => `<a href="${yt(v)}" target="_blank">${esc(v.titulo.slice(0, 55))}</a> (${nf(v.v28_views)})`).join(" · ")}${semLink.length > 4 ? " …" : ""}`]);
+  const linkV = {}; D.links.forEach(l => (linkV[l.camp || l.pagina] ||= new Set()).add(l.video_id));
+  const capPorCamp = {}; D.captacao.forEach(c => capPorCamp[c.camp] = (capPorCamp[c.camp] || 0) + c.d28);
+  const byId = Object.fromEntries(D.videos.map(v => [v.video_id, v]));
+  const mortos = Object.entries(linkV).map(([k, s]) => [k, [...s].map(id => byId[id]).filter(v => v && (!st.canal || v.canal === st.canal))])
+    .filter(([k, vs]) => vs.length && vs.reduce((t, v) => t + (v.v28_views || 0), 0) >= 500 && !(capPorCamp[k] > 0) && !D.captacao.some(c => c.cont === k && c.d28 > 0))
+    .map(([k, vs]) => [k, vs.reduce((t, v) => t + (v.v28_views || 0), 0)]).sort((x, y) => y[1] - x[1]);
+  const quebr = vids().filter(v => v.duracao_s === 0 && !["agendada", "ao_vivo"].includes(v.formato));
+  if (quebr.length) out.push(["bad", "🧩", `<b>${quebr.length} vídeo(s) público(s) quebrado(s)</b> (duração 0, nada processado — envio que travou): ${quebr.map(v => `<a href="${yt(v)}" target="_blank">${esc(v.titulo.slice(0, 60))}</a> <code>${v.video_id}</code>`).join(" · ")}. Conferir no Studio e apagar se for duplicado.`]);
+  if (mortos.length) out.push(["bad", "🧯", `<b>${mortos.length} link(s) de captação em vídeos com audiência e 0 cadastro em 28 d</b> — conferir se a página ainda está no ar e com o formulário certo (ou se ela grava fora das páginas do gerador, aí o painel não enxerga):${mortos.slice(0, 4).map(([k, n]) => `<code>${esc(k)}</code> (${nf(n)} vis.)`).join(" · ")}`]);
+  const pg = vids().filter(pago); if (pg.length) out.push(["", "💸", `${pg.length} vídeo(s) com mais da metade das visualizações vindas de anúncio ficam fora do placar orgânico (marque "mostrar pagos" no Placar para ver).`]);
+  if (a && (Date.now() - a) / DAY > 4) out.push(["warn", "⏳", `O Analytics está parado em ${dBRd(D.coleta.analytics_ate)}. Se passar de 4 dias, conferir se a rotina está rodando no Mac.`]);
+  if (!out.length) out.push(["ok", "✅", "Nada pedindo ação agora."]);
+  document.getElementById("alertas").innerHTML = out.map(([c, i, t]) => `<div class="al ${c}"><span class="ic">${i}</span><div>${t}</div></div>`).join("");
+}
+
+// ===== aba PLACAR =====
+function placar() {
+  const p28 = st.per === "28";
+  let rows = vids().filter(v => v.duracao_s !== 0 && (st.pagos || !pago(v)) && (!st.fmt || v.formato === st.fmt) && (!st.soEst || v.esteira_slug)
+    && (!st.q || (v.titulo || "").toLowerCase().includes(st.q.toLowerCase())) && (p28 ? (v.v28_views || 0) > 0 || idade(v) < 28 : true));
+  rows = rows.map(v => { const views = p28 ? v.v28_views : v.total_views, subs = p28 ? v.v28_subs : v.total_subs, cad = p28 ? v.cad28 : v.cad;
+    return {v, views, subs, cad, subsMil: porMil(subs, views), cadMil: v.em_serie ? null : porMil(cad, views), pct: v.v28_pct, pub: v.publicado_em}; });
+  const key = {views:"views", subs:"subs", subsMil:"subsMil", cad:"cad", cadMil:"cadMil", pct:"pct", pub:"pub"}[st.sort];
+  rows.sort((a, b) => ((a[key] ?? -1) > (b[key] ?? -1) ? 1 : (a[key] ?? -1) < (b[key] ?? -1) ? -1 : 0) * st.dir);
+  const th = (k, t, cls = "") => `<th class="sortable ${cls} ${st.sort === k ? "sorted" : ""}" data-s="${k}">${t}${st.sort === k ? (st.dir < 0 ? " ↓" : " ↑") : ""}</th>`;
+  document.getElementById("view").innerHTML = `<div class="card">
+    <div class="card-head"><div><h2>Placar dos vídeos</h2><div class="hint">Inscritos e cadastros <b>a cada mil visualizações</b> são as colunas que dizem o que vale gravar de novo. "Série" = o link de captação está em vários vídeos e o cadastro não dá para separar por vídeo (ver Acervo que capta).</div></div></div>
+    <div class="tools">
+      <div class="seg" id="segPer"><button data-v="28" class="${p28 ? "on" : ""}">Últimos 28 dias</button><button data-v="all" class="${p28 ? "" : "on"}">Vida toda</button></div>
+      <div class="seg" id="segFmt"><button data-v="" class="${!st.fmt ? "on" : ""}">Todos</button><button data-v="video" class="${st.fmt === "video" ? "on" : ""}">Vídeos</button><button data-v="live" class="${st.fmt === "live" ? "on" : ""}">Lives</button><button data-v="short" class="${st.fmt === "short" ? "on" : ""}">Shorts</button></div>
+      <input type="search" id="q" placeholder="Buscar no título…" value="${esc(st.q)}">
+      <label class="chk"><input type="checkbox" id="soEst" ${st.soEst ? "checked" : ""}> só esteira /youtube</label>
+      <label class="chk"><input type="checkbox" id="pagos" ${st.pagos ? "checked" : ""}> mostrar pagos</label>
+    </div>
+    <div class="rs-wrap"><table class="rs wide"><thead><tr><th class="l">Vídeo</th>${th("pub", "Publicado")}${th("views", "Visualizações")}${th("pct", "% assistido<br>(28 d)")}${th("subs", "Inscritos")}${th("subsMil", "Inscritos<br>/ mil")}${th("cad", "Cadastros")}${th("cadMil", "Cadastros<br>/ mil")}<th>Contador<br>público</th></tr></thead>
+    <tbody>${rows.length ? rows.slice(0, 300).map(r => `<tr><td class="l tit"><a href="${yt(r.v)}" target="_blank" rel="noopener">${esc(r.v.titulo)}</a><br>${tagsV(r.v)}</td>
+      <td>${dBR(r.pub)}</td><td>${nf(r.views)}</td><td>${pct(r.pct)}</td><td>${nf(r.subs)}</td><td>${n1(r.subsMil)}</td>
+      <td>${r.v.em_serie ? `<span class="mut">série</span>` : nf(r.cad)}${r.v.cad_sup && !r.v.em_serie ? `<br><span class="mut" style="font-size:11px">${r.v.cad_sup} sup.</span>` : ""}</td><td>${n1(r.cadMil)}</td><td class="mut">${nf(r.v.views_publico)}</td></tr>`).join("")
+      : `<tr><td colspan="9" class="empty">Nenhum vídeo com esse filtro.</td></tr>`}</tbody></table></div>
+    ${rows.length > 300 ? `<div class="hint" style="margin-top:8px">Mostrando 300 de ${rows.length}. Use a busca.</div>` : ""}</div>`;
+  const V = document.getElementById("view");
+  V.querySelectorAll("th.sortable").forEach(t => t.onclick = () => { const k = t.dataset.s; st.dir = st.sort === k ? -st.dir : -1; st.sort = k; placar(); });
+  V.querySelectorAll("#segPer button").forEach(b => b.onclick = () => { st.per = b.dataset.v; placar(); });
+  V.querySelectorAll("#segFmt button").forEach(b => b.onclick = () => { st.fmt = b.dataset.v; placar(); });
+  const q = V.querySelector("#q"); q.oninput = () => { st.q = q.value; clearTimeout(q._t); q._t = setTimeout(() => { placar(); const n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 250); };
+  V.querySelector("#soEst").onchange = e => { st.soEst = e.target.checked; placar(); };
+  V.querySelector("#pagos").onchange = e => { st.pagos = e.target.checked; placar(); };
+}
+
+// ===== aba VÍDEO NOVO =====
+function novo() {
+  const cand = vids().filter(v => (v.esteira_slug || idade(v) <= 60) && v.formato !== "short" && !pago(v)).sort((a, b) => new Date(b.publicado_em) - new Date(a.publicado_em));
+  if (!cand.length) { document.getElementById("view").innerHTML = `<div class="card empty">Nenhum vídeo dos últimos 60 dias neste canal.</div>`; return; }
+  if (!st.vid || !cand.some(v => v.video_id === st.vid)) st.vid = (cand.find(v => v.esteira_slug) || cand[0]).video_id;
+  const v = cand.find(x => x.video_id === st.vid), det = D.detalhe[v.video_id] || {};
+  const base = D.videos.filter(x => x.esteira_slug && x.video_id !== v.video_id && !pago(x));
+  const sv = serieIdade(v), sb = base.map(serieIdade);
+  const marco = (n) => { const ok = marcoOk(v, n), val = ok ? acum(sv, n) : null;
+    const ref = base.map((x, i) => marcoOk(x, n) ? acum(sb[i], n) : null).filter(x => x != null);
+    const med = ref.length ? ref.reduce((a, b) => a + b, 0) / ref.length : null; return {ok, val, med, nref: ref.length}; };
+  const idd = idade(v);
+  const mc = [[2, "48 horas"], [7, "7 dias"], [30, "30 dias"]].map(([n, nome]) => { const m = marco(n);
+    const dif = m.val != null && m.med ? (m.val / m.med - 1) * 100 : null;
+    return `<div class="mc"><h3>${nome}</h3>${m.ok ? `<div class="big">${nf(m.val)}</div><div class="row"><span>média da esteira (${m.nref})</span><span>${nf(m.med)}</span></div>
+      ${dif != null ? `<div class="row"><span>diferença</span><span class="${dif >= 0 ? "good" : "bad"}">${dif >= 0 ? "+" : ""}${n1(dif)}%</span></div>` : ""}`
+      : `<div class="big mut">${idd < n ? "em " + Math.ceil(n - idd) + " d" : "Analytics fecha em 1–2 d"}</div><div class="row"><span>média da esteira (${m.nref})</span><span>${nf(m.med)}</span></div>`}</div>`; }).join("");
+  const fontes = det.fontes || [], tot = fontes.reduce((s, f) => s + f[1], 0);
+  const busca = fontes.find(f => f[0] === "YT_SEARCH"), feed = fontes.find(f => f[0] === "SUBSCRIBER");
+  const insc = det.inscrito || [], si = insc.find(r => r[0] === "SUBSCRIBED"), ni = insc.find(r => r[0] === "UNSUBSCRIBED");
+  const byId = Object.fromEntries(D.videos.map(x => [x.video_id, x]));
+  document.getElementById("view").innerHTML = `
+  <div class="card"><div class="tools" style="margin:0"><select id="selV">${cand.map(x => `<option value="${x.video_id}" ${x.video_id === v.video_id ? "selected" : ""}>${x.esteira_slug ? "★ " : ""}${dBR(x.publicado_em)} · ${esc(x.titulo.slice(0, 80))}</option>`).join("")}</select>
+    <a href="${yt(v)}" target="_blank" rel="noopener" style="font-size:12.5px;color:var(--yt);font-weight:600">abrir no YouTube ↗</a></div>
+    <div style="margin-top:8px">${tagsV(v)}</div></div>
+  <div class="rail">${[[nf(v.views_publico), "contador público agora"], [nf(v.total_views), "visualizações (Analytics)"], [pct(v.v28_pct), "% assistido"],
+     [nf(v.total_subs), "inscritos ganhos"], [v.em_serie ? "série" : nf(v.cad), "cadastros"], [v.em_serie ? "—" : n1(porMil(v.cad, v.views_publico)), "cadastros / mil"],
+     [tot ? pct(100 * (busca?.[1] || 0) / tot) : "—", "vindo da busca"], [nf(v.comentarios), "comentários"]].map(([n, l]) => `<div class="cd"><span class="n">${n}</span><span class="l">${l}</span></div>`).join("")}</div>
+  <div class="card"><div class="card-head"><div><h2>Marcos × média dos vídeos da esteira</h2><div class="hint">Visualizações acumuladas no Analytics até o marco, comparadas com os outros vídeos da esteira /youtube na mesma idade.</div></div></div><div class="marcos">${mc}</div></div>
+  <div class="grid g2">
+    <div class="card"><h2>Visualizações por dia de vida</h2><div class="hint">Dia 0 = dia da publicação. Cinza = média da esteira.</div><div class="chart" id="chDia" style="margin-top:10px"></div></div>
+    <div class="card"><h2>Retenção (público orgânico)</h2><div class="hint">% de quem começou e ainda assiste em cada ponto do vídeo. Cinza = média da esteira.</div><div class="chart" id="chRet" style="margin-top:10px"></div></div>
+  </div>
+  <div class="grid g3">
+    <div class="card"><h2>De onde veio</h2><div class="hint">Visualizações · % assistido por fonte</div><div style="margin-top:10px">${miniBars(fontes.map(f => [FONTE[f[0]] || f[0], f[1], f[3]]), r => nf(r[1]) + " · " + Math.round(r[2]) + "%")}</div></div>
+    <div class="card"><h2>O que buscaram</h2><div class="hint">Termos da busca do YouTube</div><div style="margin-top:10px">${miniBars(det.buscas || [])}</div></div>
+    <div class="card"><h2>Quem assistiu</h2><div class="hint">Inscrito × novo · aparelho</div>
+      <div style="margin-top:10px">${miniBars([si && ["Inscritos", si[1], si[3]], ni && ["Não inscritos", ni[1], ni[3]]].filter(Boolean), r => nf(r[1]) + " · " + Math.round(r[2]) + "%")}</div>
+      <div style="margin-top:12px">${miniBars((det.dispositivos || []).map(d => [DISP[d[0]] || d[0], d[1], d[2]]), r => nf(r[1]) + " · " + Math.round(r[2]) + "%")}</div></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h2>Links externos</h2><div style="margin-top:10px">${miniBars(det.externos || [])}</div></div>
+    <div class="card"><h2>Veio sugerido por</h2><div class="hint">Vídeos que mandaram público para este</div><div style="margin-top:10px">${miniBars((det.sugeridos || []).map(s => [byId[s[0]] ? byId[s[0]].titulo : s[0] + " (outro canal)", s[1]]))}</div></div>
+  </div>`;
+  document.getElementById("selV").onchange = e => { st.vid = e.target.value; novo(); };
+  const nDias = Math.min(31, Math.max(sv.length, 3));
+  const media = Array.from({length: nDias}, (_, i) => { const xs = base.map((x, k) => marcoOk(x, i + 1) ? sb[k][i] ?? 0 : null).filter(z => z != null); return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null; });
+  lineChart(document.getElementById("chDia"), [{name: "Este vídeo", y: sv.slice(0, nDias), color: "var(--yt)"}, {name: "Média da esteira", y: media, color: "var(--avg)", dash: true}],
+    {fx: (i, l) => l ? "dia " + i : "d" + i, fy: (y, l) => nf(y), label: "Visualizações por dia"});
+  const rv = det.retencao || [], pts = Array.from({length: 21}, (_, i) => i * 5);
+  const at = (r, p) => { if (!r || !r.length) return null; let best = r[0]; for (const x of r) if (Math.abs(x[0] * 100 - p) < Math.abs(best[0] * 100 - p)) best = x; return best[1] * 100; };
+  const rb = base.map(x => (D.detalhe[x.video_id] || {}).retencao).filter(r => r && r.length);
+  lineChart(document.getElementById("chRet"), [{name: "Este vídeo", y: pts.map(p => at(rv, p)), color: "var(--yt)"},
+    {name: `Média da esteira (${rb.length})`, y: pts.map(p => { const xs = rb.map(r => at(r, p)).filter(z => z != null); return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null; }), color: "var(--avg)", dash: true}],
+    {fx: (i, l) => pts[i] + "%" + (l && v.duracao_s ? " (" + mmss(v.duracao_s * pts[i] / 100) + ")" : ""), fy: (y, l) => Math.round(y) + "%", ymax: 100, label: "Curva de retenção"});
+}
+
+// ===== aba ACERVO QUE CAPTA =====
+function acervo() {
+  const byId = Object.fromEntries(D.videos.map(v => [v.video_id, v]));
+  const cap = capFiltrada();
+  const now = Date.now();
+  const stt = c => { const d = (now - new Date(c.ultimo)) / DAY; return d <= 7 ? ["ativo", "ativo"] : d <= 28 ? ["esfr", "esfriando"] : ["par", "parado"]; };
+  const origem = c => (c.fontes || []).map(f => /chat/.test(f) ? "chat da live" : /descricao/.test(f) ? "descrição" : f === "youtube" ? "descrição (esteira)" : f).filter((x, i, a) => a.indexOf(x) === i).join(", ");
+  const tot7 = cap.reduce((s, c) => s + c.d7, 0), tot28 = cap.reduce((s, c) => s + c.d28, 0);
+  const est28 = cap.filter(c => (c.vids || []).some(id => byId[id]?.esteira_slug)).reduce((s, c) => s + c.d28, 0);
+  const semLink = vids().filter(v => !v.tem_link && v.formato !== "short" && !pago(v) && (v.v28_views || 0) >= 100).sort((a, b) => b.v28_views - a.v28_views);
+  document.getElementById("view").innerHTML = `
+  <div class="rail">${[[nf(tot7), "cadastros · 7 d"], [nf(tot28), "cadastros · 28 d"], [nf(est28), "dos vídeos da esteira · 28 d"], [nf(tot28 - est28), "do acervo antigo / chat · 28 d"]].map(([n, l]) => `<div class="cd"><span class="n">${n}</span><span class="l">${l}</span></div>`).join("")}</div>
+  <div class="card"><h2>Cadastros do YouTube por dia</h2><div class="hint">Todas as páginas de captação, origem YouTube orgânico (descrição, chat, esteira). Últimos 90 dias.</div><div class="chart" id="chLeads" style="margin-top:10px"></div></div>
+  <div class="card"><div class="card-head"><div><h2>Links que captam</h2><div class="hint">Cada linha é um link (campanha + conteúdo da UTM). "Vídeos" = vídeos que têm esse link na descrição hoje. Cadastro de antes da publicação é teste e não conta.</div></div></div>
+    <div class="rs-wrap"><table class="rs wide"><thead><tr><th class="l">Link (campanha)</th><th class="l">Vídeos com o link</th><th class="l">Origem</th><th>7 d</th><th>28 d</th><th>Total</th><th>% superior</th><th>Entrou no grupo</th><th>Último</th><th>Situação</th></tr></thead>
+    <tbody>${cap.map(c => { const [cls, txt] = stt(c), vs = (c.vids || []).map(id => byId[id]).filter(Boolean).sort((a, b) => (b.v28_views || 0) - (a.v28_views || 0));
+      return `<tr><td class="l" style="max-width:260px"><b>${esc(c.camp || "(sem campanha)")}</b><br><span class="mut" style="font-size:11px;word-break:break-all">${esc(c.cont)}</span></td>
+      <td class="l" style="max-width:340px;font-size:12px">${vs.length ? vs.slice(0, 3).map(v => `<a href="${yt(v)}" target="_blank" rel="noopener" style="color:var(--ink-2)">${esc(v.titulo.slice(0, 60))}</a> <span class="mut">(${nf(v.v28_views)} em 28 d)</span>`).join("<br>") + (vs.length > 3 ? `<br><span class="mut">+${vs.length - 3} vídeos</span>` : "") : `<span class="mut">nenhum vídeo com esse link hoje (link antigo, chat ou comentário)</span>`}</td>
+      <td class="l mut" style="font-size:12px">${esc(origem(c))}</td><td>${nf(c.d7)}</td><td><b>${nf(c.d28)}</b></td><td>${nf(c.total)}</td><td>${c.total ? Math.round(100 * c.sup / c.total) + "%" : "—"}</td>
+      <td>${c.grupo ? nf(c.grupo) : `<span class="mut">—</span>`}</td><td>${dBR(c.ultimo)}</td><td><span class="pill ${cls}">${txt}</span></td></tr>`; }).join("") || `<tr><td colspan="10" class="empty">Sem cadastros.</td></tr>`}</tbody></table></div>
+    <div class="hint" style="margin-top:8px">"Entrou no grupo" só existe nas páginas novas (rastreio do grupo pela Sendflow); as páginas antigas mostram "—".</div></div>
+  <div class="card"><h2>Vídeos com audiência e sem link de captação</h2><div class="hint">≥ 100 visualizações em 28 dias, sem link com UTM ou página na descrição. Cada um é cadastro deixado na mesa.</div>
+    <div class="rs-wrap" style="margin-top:10px"><table class="rs"><thead><tr><th class="l">Vídeo</th><th>Visualizações 28 d</th><th>Publicado</th></tr></thead><tbody>
+    ${semLink.slice(0, 40).map(v => `<tr><td class="l tit"><a href="${yt(v)}" target="_blank" rel="noopener">${esc(v.titulo)}</a><br>${tagsV(v)}</td><td>${nf(v.v28_views)}</td><td>${dBR(v.publicado_em)}</td></tr>`).join("") || `<tr><td colspan="3" class="empty">Todos os vídeos com audiência têm link. 👏</td></tr>`}</tbody></table></div></div>`;
+  const ld = D.leads_dia, a = ld.length ? dParse(ld[0][0]) : null, mapa = Object.fromEntries(ld.map(r => [r[0], r])), pts = [];
+  if (a) for (let d = new Date(a); d <= new Date(); d = new Date(+d + DAY)) { const k = d.toISOString().slice(0, 10); pts.push(mapa[k] || [k, 0, 0]); }
+  barChart(document.getElementById("chLeads"), pts, {label: "Cadastros do YouTube por dia"});
+}
+
+// ===== aba APRENDIZADOS =====
+function aprend() {
+  const c = D.caderno;
+  if (!c) { document.getElementById("view").innerHTML = `<div class="card empty">O caderno ainda não foi enviado pela rotina.</div>`; return; }
+  const cont = s => c.regras.filter(r => r.status === s).length;
+  const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`(.+?)`/g, "<code>$1</code>");
+  const lab = {hipotese: "🟡 hipótese", confirmada: "🟢 confirmada", derrubada: "🔴 derrubada"};
+  document.getElementById("view").innerHTML = `
+  <div class="rail">${[[cont("confirmada"), "confirmadas (3+ vídeos)"], [cont("hipotese"), "hipóteses (1–2 vídeos)"], [cont("derrubada"), "derrubadas"], [dBR(c.atualizado_em), "caderno atualizado"]].map(([n, l]) => `<div class="cd"><span class="n">${n}</span><span class="l">${l}</span></div>`).join("")}</div>
+  <div class="card"><div class="card-head"><div><h2>O que os vídeos já ensinaram</h2><div class="hint">Caderno vivo da skill /youtube: cada leitura (48 h, 7 d, 30 d) confirma, derruba ou cria regra. A pauta de cada vídeo novo parte daqui.</div></div></div>
+    <div class="regras">${c.regras.slice().sort((a, b) => ({confirmada: 0, hipotese: 1, derrubada: 2}[a.status] - {confirmada: 0, hipotese: 1, derrubada: 2}[b.status]) || a.n - b.n).map(r => `<div class="regra"><div class="hd"><div class="num">${r.n}</div><div>
+      <h3>${md(r.titulo)}</h3><span class="st ${r.status}">${lab[r.status]}</span>${r.texto.trim() ? `<p>${md(r.texto.trim())}</p>` : ""}${r.itens.length ? `<ul>${r.itens.map(i => `<li>${md(i)}</li>`).join("")}</ul>` : ""}</div></div></div>`).join("")}</div></div>
+  <div class="card"><h2>Perguntas em aberto (testar nos próximos vídeos)</h2><ul style="margin:10px 0 0 18px;font-size:13px;color:var(--ink-2)">${c.perguntas.map(p => `<li style="margin:5px 0">${md(p)}</li>`).join("") || "<li>—</li>"}</ul></div>`;
+}
+
+function render() {
+  topo();
+  document.querySelectorAll("#segCanal button").forEach(b => b.classList.toggle("on", b.dataset.v === st.canal));
+  document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.t === st.tab));
+  ({placar, novo, acervo, aprend})[st.tab]();
+}
+document.querySelectorAll("#segCanal button").forEach(b => b.onclick = () => { st.canal = b.dataset.v; save(); render(); });
+document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => { st.tab = b.dataset.t; save(); render(); });
+
+async function carregar() {
+  try {
+    const r = await fetch(API + "?k=" + encodeURIComponent(K)); const j = await r.json();
+    if (!r.ok || j.error) throw new Error(j.error || r.status);
+    D = j; render();
+  } catch (e) { document.getElementById("view").innerHTML = `<div class="card err">Não consegui carregar o painel (${esc(e.message)}). Confira o link com <code>?k=</code>.</div>`; document.getElementById("upd").textContent = "erro"; }
+}
+carregar(); setInterval(carregar, 15 * 60 * 1000);
+</script>
+</body>
+</html>

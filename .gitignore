@@ -1,0 +1,11 @@
+.token
+.repo
+edge/
+migrations/
+publicar.sh
+coletar.py
+tipos.json
+*.log
+.DS_Store
+__pycache__/
+.ids_*.json
