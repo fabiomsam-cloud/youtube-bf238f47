@@ -247,11 +247,24 @@ function capFiltrada() {
 }
 function alertas() {
   const out = [], a = analyticsAte();
+  // Marcos 48 h / 7 d / 30 d: a rotina diária (07h30) lê sozinha. Aviso SÓ se ela deixou de ler um marco já fechado.
+  // leitura com mais dias cobre os marcos anteriores (ex.: lido com 5 d → o 48 h não precisa mais)
+  const diasLidos = {};
+  (D.caderno?.leituras || []).forEach(l => { const m = /^(\d+)\s*(h|d)$/.exec(l.marco || ""); if (!m) return;
+    const dd = m[2] === "h" ? +m[1] / 24 : +m[1]; diasLidos[l.video_id] = Math.max(diasLidos[l.video_id] || 0, dd); });
+  const lidos = {has: k => { const [vid, mk] = k.split("|"); return (diasLidos[vid] || 0) >= ({"48h": 2, "7d": 7, "30d": 30})[mk]; }};
+  const atrasadas = [], proximas = [];
   for (const v of vids().filter(v => v.esteira_slug)) {
-    const id = idade(v);
-    for (const [n, nome] of [[2, "48 h"], [7, "7 dias"], [30, "30 dias"]])
-      if (id >= n && id < n + 3) out.push(["info", "📊", `<b>${esc(v.titulo)}</b> fez ${nome}. Pedir a leitura ao Claude (<code>/youtube</code> modo LEITURA) para atualizar o caderno${marcoOk(v, n) ? "" : " — o Analytics ainda não fechou esse marco, espere 1–2 dias"}.`]);
+    const id = idade(v), p0 = dParse(new Date(new Date(v.publicado_em).getTime() - 7*3600e3).toISOString());
+    for (const [n, k, nome] of [[2, "48h", "48 h"], [7, "7d", "7 d"], [30, "30d", "30 d"]]) {
+      if (lidos.has(v.video_id + "|" + k) || id >= n + 10) continue;
+      const curto = esc(v.titulo.replace(/^Concurso\s+/i, "").slice(0, 42));
+      if (marcoOk(v, n) && a && (a - p0) / DAY - (n - 1) >= 1) atrasadas.push(`<b>${curto}</b> (${nome})`);
+      else if (id >= n - 2) proximas.push(`${curto} · ${nome}`);
+    }
   }
+  if (atrasadas.length) out.push(["warn", "⚠️", `A rotina das 07h30 não leu ${atrasadas.length} marco(s) que o Analytics já fechou: ${atrasadas.join(" · ")}. Confira a tarefa “【diário 07h30】 Painel do YouTube + leitura dos marcos” em Agendadas.`]);
+  if (proximas.length) out.push(["", "🗓️", `<span class="mut">Próximas leituras automáticas (a rotina das 07h30 faz sozinha, nada a fazer): ${proximas.join(" · ")}.</span>`]);
   const semLink = vids().filter(v => !v.tem_link && v.formato !== "short" && !pago(v) && (v.v28_views || 0) >= 300).sort((x, y) => y.v28_views - x.v28_views);
   if (semLink.length) out.push(["warn", "🔗", `<b>${semLink.length} vídeo(s) com audiência e sem link de captação na descrição</b> (≥ 300 visualizações em 28 d): ${semLink.slice(0, 4).map(v => `<a href="${yt(v)}" target="_blank">${esc(v.titulo.slice(0, 55))}</a> (${nf(v.v28_views)})`).join(" · ")}${semLink.length > 4 ? " …" : ""}`]);
   const linkV = {}; D.links.forEach(l => (linkV[l.camp || l.pagina] ||= new Set()).add(l.video_id));
